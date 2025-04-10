@@ -9,12 +9,13 @@ const ContactsButton: React.FC<ContactsButtonProps> = ({ closeNav }) => {
   return (
     <NavLink
       to="/contacts"
-      className="btn btn-warning text-dark fw-bold"
-      onClick={closeNav}
+      className="btn btn-lg text-white fw-bold"
       style={{
-        boxShadow: "0px 4px 6px rgba(0,0,0,0.3)",
+        backgroundColor: "rgb(43, 42, 41)", // Желтый цвет кнопки
+        boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.3)",
         fontSize: "1rem",
       }}
+      onClick={closeNav}
     >
       Контакты
     </NavLink>

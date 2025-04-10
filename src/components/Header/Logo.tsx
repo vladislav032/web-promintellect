@@ -11,21 +11,23 @@ const Logo: React.FC<LogoProps> = ({ closeNav }) => {
       className="navbar-brand d-flex align-items-center"
       to="/"
       onClick={closeNav}
+      style={{
+        justifyContent: "flex-start", // Размещение лого слева
+      }}
     >
       <img
-        src="/logo.png"
+        src="src/assets/PromIntellect_logotype_tm_black.png"
         className="me-2"
         style={{
-          height: "50px",
-          filter: "drop-shadow(2px 4px 6px rgba(0,0,0,0.5))",
+          height: "140px",
         }}
+        alt="Logo"
       />
       <span
         className="d-none d-lg-block"
         style={{
           fontSize: "1.5rem",
           fontWeight: "bold",
-          textShadow: "2px 2px 4px rgba(0,0,0,0.7)",
         }}
       >
         METALLURGY PRO

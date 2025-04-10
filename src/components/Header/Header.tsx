@@ -1,37 +1,52 @@
-import React, { useState } from "react";
+import React, { useMemo } from "react";
 import Logo from "./Logo";
-import MobileMenuButton from "./MobileMenuButton";
 import NavMenu from "./NavMenu";
-import LanguageSelector from "./LanguageSelector";
 import ContactsButton from "./ContactsButton";
 
 const Header: React.FC = () => {
-  const [expanded, setExpanded] = useState(false);
-
-  const toggleMenu = () => setExpanded(!expanded);
-  const closeNav = () => setExpanded(false);
+  // Оптимизация логики с использованием useMemo
+  const headerStyles = useMemo(
+    () => ({
+      backgroundColor: "rgb(255, 255, 255)", // Цвет фона
+      borderBottom: "2px solid rgb(172, 172, 172)", // Граница
+      boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.2)", // Тень для хедера
+    }),
+    []
+  );
 
   return (
-    <header
-      className="bg-gradient sticky-top shadow-lg"
-      style={{
-        background: "linear-gradient(45deg, #0F2027, #203A43, #2C5364)",
-        color: "#fff",
-      }}
-    >
-      <nav className="navbar navbar-expand-lg navbar-dark">
-        <div className="container">
-          <Logo closeNav={closeNav} />
-          <MobileMenuButton expanded={expanded} toggleMenu={toggleMenu} />
-          <div
-            className={`collapse navbar-collapse ${expanded ? "show" : ""}`}
-            style={{ transition: "all 0.3s ease-in-out" }}
+    <header className="py-3" style={headerStyles}>
+      <nav className="navbar navbar-expand-lg">
+        <div className="container d-flex justify-content-between align-items-center">
+          {/* Логотип */}
+          <div className="me-auto d-flex align-items-center">
+            <Logo closeNav={() => {}} />
+          </div>
+
+          {/* Кнопка для открытия мобильного меню */}
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
           >
-            <NavMenu closeNav={closeNav} />
-            <div className="d-flex align-items-center">
-              <LanguageSelector />
-              <ContactsButton closeNav={closeNav} />
-            </div>
+            <span className="navbar-toggler-icon"></span>
+          </button>
+
+          {/* Основное меню */}
+          <div
+            className="collapse navbar-collapse justify-content-center"
+            id="navbarNav"
+          >
+            {useMemo(() => <NavMenu closeNav={() => {}} />, [])}
+          </div>
+
+          {/* Кнопка контактов */}
+          <div className="d-none d-lg-block">
+            {useMemo(() => <ContactsButton closeNav={() => {}} />, [])}
           </div>
         </div>
       </nav>
